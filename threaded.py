@@ -4,16 +4,16 @@ import _thread as thread
 import sys
 # this function establishes the client connection. 
 def client(connection):
-    while True:
+    try:
         req = connection.recv(4096).decode()
         print("recived: " + req)
         #client will send back HTTP/1.1 200 OK
         res = "HTTP/1.1 200 OK\r\n"
         connection.sendall(res.encode())
         # if the client specifies  exit in the request the connection will end. 
-        if(req.lower() == "exit"):
-            connection.close()
-            break
+    except Exception:
+        print(f"Client error: {Exception}")
+    finally:
         connection.close()
 # this creates the socket and deligates the client to its own socket thread. 
 def main():
@@ -33,6 +33,6 @@ def main():
         connection, addr = serverSocket.accept()
         print('server running on: ', addr)
         threading.Thread(target=client, args=(connection, )).start()
-        serverSocket.close()
+    serverSocket.close()
 if __name__ == '__main__':
     main()
