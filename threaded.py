@@ -26,7 +26,7 @@ def main():
     except:
         print('cant bind socket')
         sys.exit()
-    serverSocket.listen(1)
+    serverSocket.listen(10)
 
     # when a new client request a tcp connection it will open a new seperate thread for it.
     while True:
