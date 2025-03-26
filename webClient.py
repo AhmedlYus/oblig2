@@ -19,7 +19,7 @@ def client(server, port, file):
     request = f"GET /{file} HTTP/1.1\r\nHost: {server}\r\n\r\n " . format(arg.file, arg.server)
     clientSocket.send(request.encode())
 
-    #we recive a response from the cient and decodes it. before the client closes
+    #we recive a response from the cient and decodes it. before the client
 
     res = clientSocket.recv(4096)
 
